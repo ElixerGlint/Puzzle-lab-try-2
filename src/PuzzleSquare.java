@@ -32,23 +32,16 @@ public class PuzzleSquare {
     public boolean guessMove() throws Exception {
 
         if(square.length == 3 && !checkIfSolved()) {
+
             //up
-            System.out.println("Target of 66");
-            System.out.println(findperfectrow(6));
-
-
-            if(zeroRow > 0 && zeroRow-1 < findperfectrow(square[zeroRow - 1][zeroCol])) {
-                makeMove(0);
+            if(zeroRow > 0 && zeroRow-1 < findperfectrow(square[zeroRow - 1][zeroCol])) { //up
+                return makeMove(0);
             }
-
-            /* 
-            if(zeroRow > 0 && zeroRow - 1 < 2) {
-                System.out.println("Made it here!");
-                makeMove(0);
-            }*/
-
-
             //down
+            if(zeroRow < 2 && zeroRow + 1 > findperfectrow(square[zeroRow+1][zeroCol])) {
+                System.out.println("Going down!");
+                return makeMove(2);
+            }
 
             //right
 
@@ -59,7 +52,9 @@ public class PuzzleSquare {
         }
 
 
-        return false;
+        System.out.println("No good move to make!");
+        Thread.sleep(1000);
+        return true;
     }
 
     public int findperfectcol(int target) {
@@ -92,51 +87,6 @@ public class PuzzleSquare {
     }
 
 
-
-
-    public boolean badguessMove() throws Exception { //returns true 100% of time
-        if (square.length == 3) {
-            PuzzleSquare abc = new PuzzleSquare(3);
-            int[][] temp = abc.getSquare();
-            int temprow;
-            int tempcol;
-
-            for(int row = 0; row < 3; row++) {
-                for(int col = 0; col < 3; col++) {
-                    if(getZeroRow()!= 0 && temp[row][col] == square[getZeroRow()-1][getZeroCol()]) { //up
-                        temprow = row;
-                        if(temprow > getZeroRow()-1) {
-                            return makeMove(0);
-                        }
-                    }
-                    else if (getZeroRow()!= 2 && temp[row][col] == square[getZeroRow()+1][getZeroCol()]) { //down
-                        temprow = row;
-                        if(temprow<getZeroRow()+1) {
-                            return makeMove(2);
-                        }
-                    }
-                    else if(getZeroCol()!= 0 && temp[row][col] == square[getZeroRow()][getZeroCol()-1]) { //left
-                        temprow = row;
-                        tempcol = col;
-                        if(getZeroCol()-1!=tempcol && temprow > getZeroRow()) { //right    possible error here, tmepcol in left
-                            return makeMove(1);
-                        }
-                    }
-                    else if (getZeroCol()!=2) {
-                        return makeMove(3);
-                    }
-                }
-            }
-            
-            System.out.println("No good moves to make");
-            Thread.sleep(1000);
-            return true;
-        }
-        System.out.println("This is not 3x3");
-        Thread.sleep(1000);
-        return true;
-    }
-
     public boolean makeMove(int dir) throws Exception { //0 is move Up 1 is move Left 2 is move Down 3 is Move Right
         //move up
         if (dir == 0 && zeroRow - 1 >= 0) {
@@ -160,6 +110,7 @@ public class PuzzleSquare {
 
         //move down
         if (dir == 2 && zeroRow + 1 <= square.length - 1) {
+            System.out.println("Down triggered deeper");
             int temp = square[zeroRow + 1][zeroCol];
             square[zeroRow + 1][zeroCol] = 0;
             square[zeroRow][zeroCol] = temp;
@@ -179,10 +130,8 @@ public class PuzzleSquare {
         }
 
         if (dir == 4) {
-            boolean temp = guessMove();
-            if(temp) {
-                return true;
-            }
+            guessMove();
+            return true;
         }
 
         if (dir == 0 || dir == 1 || dir == 2 || dir == 3 || dir == 4) {
