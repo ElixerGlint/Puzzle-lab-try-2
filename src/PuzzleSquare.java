@@ -35,16 +35,19 @@ public class PuzzleSquare {
 
             //up
             if(zeroRow > 0 && zeroRow-1 < findperfectrow(square[zeroRow - 1][zeroCol])) { //up
+                System.out.println("Going up!");
                 return makeMove(0);
             }
             //down
-            if(zeroRow < 2 && zeroRow + 1 > findperfectrow(square[zeroRow+1][zeroCol])) {
+            else if(zeroRow < 2 && zeroRow + 1 > findperfectrow(square[zeroRow+1][zeroCol])) {
                 System.out.println("Going down!");
                 return makeMove(2);
             }
-
             //right
-
+            else if(zeroCol > 0 && zeroCol-1 < findperfectcol(square[zeroRow][zeroCol-1])) {
+                System.out.println("Going right!");
+                return(makeMove(3));
+            }
             //left
 
 
@@ -66,6 +69,7 @@ public class PuzzleSquare {
                 if(perfectsquare[i][j] == target) {
                     return j;
                 }
+                
             }
         }
         return -100;
@@ -110,7 +114,6 @@ public class PuzzleSquare {
 
         //move down
         if (dir == 2 && zeroRow + 1 <= square.length - 1) {
-            System.out.println("Down triggered deeper");
             int temp = square[zeroRow + 1][zeroCol];
             square[zeroRow + 1][zeroCol] = 0;
             square[zeroRow][zeroCol] = temp;
