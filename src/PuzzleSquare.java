@@ -2,7 +2,6 @@
 
 
 public class PuzzleSquare {
-    //ask mr moradov about which goes last, right or left
     int[][] square;
     int moves;
     int zeroRow;
