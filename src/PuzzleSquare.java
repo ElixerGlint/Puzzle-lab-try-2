@@ -49,9 +49,9 @@ public class PuzzleSquare {
                 return(makeMove(3));
             }
             //left
-
-
-
+            else if (zeroCol < 2 ) { //&& zeroCol + 1 > findperfectcol(square[zeroRow][zeroCol+1])
+                return(makeMove(1));
+            }
         }
 
 
