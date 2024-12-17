@@ -49,7 +49,8 @@ public class PuzzleSquare {
                 return(makeMove(3));
             }
             //left
-            else if (zeroCol < 2 ) { //&& zeroCol + 1 > findperfectcol(square[zeroRow][zeroCol+1])
+            else if (zeroCol < 2 && zeroCol > 0) {
+                System.out.println("Going left");
                 return(makeMove(1));
             }
         }
