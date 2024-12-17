@@ -53,7 +53,12 @@ public class PuzzleSquare {
                 return(makeMove(1));
             }
         }
-
+        if(square.length != 3)  {
+            System.out.println("The board is not 3x3");
+            Thread.sleep(1000);
+            return true;
+        }
+    
 
         System.out.println("No good move to make!");
         Thread.sleep(1000);
